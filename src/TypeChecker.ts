@@ -119,7 +119,7 @@ export function getUnionOf<C extends TypeChecker[]>(...checkers: C) {
  * @returns TypeChecker for the intersection of `checkers`
  */
 export function getIntersectionOf<C extends TypeChecker[]>(...checkers: C) {
-    return (v => checkers.every(v)) as TypeChecker<IntersectionOf<{ [I in keyof C]: TypeChecker.GetType<C[I]> }>>;
+    return (v => checkers.every(c => v(c))) as TypeChecker<IntersectionOf<{ [I in keyof C]: TypeChecker.GetType<C[I]> }>>;
 }
 
 
